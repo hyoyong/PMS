@@ -47,15 +47,11 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
             <td width=100><p align=center>{{ boardRow.name }}</p></td>
             <td width=100><p align=center>{{ boardRow.business }}</p></td>
             <td width=100><p align=center>{{ boardRow.reference }}</p></td>
-            <td width=320>
-                <p align=center>
-                    <a href="/viewWork?memo_id={{ boardRow.id }}&current_page={{ current_page }}&searchStr=None" title="{{ boardRow.memo}}">{{ boardRow.subject }}
-                </p>
-            </td>
             <td width=100><p align=center>{{ boardRow.url }}</p></td>
             <td width=100><p align=center>{{ boardRow.contact }}</p></td>
             <td width=100><p align=center>{{ boardRow.position }}</p></td>
             <td width=100><p align=center>{{ boardRow.phone }}</p></td>
+            <td width=100><p align=center>{{ boardRow.email }}</p></td>
             <td width=100><p align=center>{{ boardRow.created_date }}</p></td>
             <td width=100><p align=center>{{ boardRow.hits }}</p></td>
           </tr>
@@ -67,7 +63,7 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
 </table>
 
 
-<table cellspacing=1 width=700 border=1 >
+<table cellspacing=1 width=100% border=1 >
     <tr>
         <td>
         {% for page in totalPageList %}
@@ -89,12 +85,12 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
 
 
 
-<table width=700>
+<table width=665>
     <tr>
-        <td><input type=button value="글쓰기"  OnClick="window.location='/show_write_form'">    </td>
+        <td><input type=button value="Add"  OnClick="window.location='/show_write_form'">    </td>
         <td><form name=searchf method=post action="/searchWithSubject/">
             <p align=right><input type=text name=searchStr size=50  maxlength=50>
-            <input type=submit value="글찾기"></p>
+            <input type=submit value="Search"></p>
         </td>
     </tr>
 </table>

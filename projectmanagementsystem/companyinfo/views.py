@@ -1,18 +1,11 @@
 # coding: utf-8
-'''
+
 from django.shortcuts import render
 from companyinfo.forms import *
 
 # Create your views here.
-def write(request):
-	if request.method == 'POST':
-		form = Form(request.POST)
-		if form.is_valid():
-			form.save()
-	else:
-		form = Form()
-	return render(request, 'write.html', {'form':form})
-'''
+
+
 
 # coding: utf-8
 # Create your views here.
@@ -26,6 +19,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from companyinfo.pagingHelper import pagingHelper
 #from django.core.urlresolvers import reverse
+
+
 
 #===========================================================================================
 rowsPerPage = 2
@@ -52,27 +47,38 @@ def show_write_form(request):
     return render_to_response('writeBoard.html')
 
 #===========================================================================================
+
 @csrf_exempt
 def DoWriteBoard(request):
-    br = CompanyInfo (technology_select = request.POST['technology_select'],
-                      url = request.POST['url'],
-                      business = request.POST['business'],
-                      name = request.POST['name'],
-					  contact = request.POST['contact'],
-					  phone = request.POST['phone'],
-					  email = request.POST['email'],
-					  position = request.POST['position'],
-					  reference = request.POST['reference'],
-                      created_date = timezone.now(),
-                      hits = 0
-                     )
-    br.save()
+	br = CompanyInfo (
+		technology_select = request.POST['technology_select'],
+		url = request.POST['url'],
+		business = request.POST['business'],
+		name = request.POST['name'],
+		contact = request.POST['contact'],
+		phone = request.POST['phone'],
+		email = request.POST['email'],
+		position = request.POST['position'],
+		reference = request.POST['reference'],
+		created_date = timezone.now(),
+		hits = 0
+	)
+	br.save()
 
-    # 다시 조회
-    url = '/listSpecificPageWork?current_page=1'
-    return HttpResponseRedirect(url)
+	# 다시 조회
+	url = '/listSpecificPageWork?current_page=1'
+	return HttpResponseRedirect(url)
 
-
+'''
+def DoWriteBoard(request):
+	if request.method == 'POST':
+		form = Form(request.POST)
+		if form.is_valid():
+			form.save()
+	else:
+		form = Form()
+	return render(request, 'write.html', {'form':form}
+'''
 #===========================================================================================
 def viewWork(request):
     pk= request.GET['memo_id']
@@ -98,7 +104,7 @@ def listSpecificPageWork(request):
 
     # 페이지를 가지고 범위 데이터를 조회한다 => raw SQL 사용함
     boardList = CompanyInfo.objects.raw('SELECT Z.* FROM(SELECT X.*, ceil( rownum / %s ) as page FROM ( SELECT ID,TECHNOLOGY_TYPE,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS \
-                                        FROM companyinfo  ORDER BY ID DESC ) X ) Z WHERE page = %s', [rowsPerPage, current_page])
+                                        FROM companyinfo_CompanyInfo  ORDER BY ID DESC ) X ) Z WHERE page = %s', [rowsPerPage, current_page])
 
     print  'boardList=',boardList, 'count()=', totalCnt
 
