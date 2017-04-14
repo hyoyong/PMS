@@ -1,46 +1,87 @@
 <html>
 <head>
-<title>글보기</title>
+<title>업체정보수정</title>
 </head>
-  
+
 <script language="javascript">
 
-	function writeCheck() 
-	{				
+	function writeCheck()
+	{
 	    var form = document.modifyform;
-	
-	    if( !form.subject.value )
+
+      if( !form.technology_select.value )
+      {
+          alert( "업체명을 적어주세요" );
+          form.technology_select.focus();
+          return;
+      }
+      if( !form.name.value )
+      {
+          alert( "업체명을 적어주세요" );
+          form.name.focus();
+          return;
+      }
+      if( !form.business.value )
+      {
+          alert( "보유기술을 적어주세요" );
+          form.business.focus();
+          return;
+      }
+	    if( !form.reference.value )
 	    {
-	        alert( "제목을 적어주세요" );
-	        form.subject.focus();
+	        alert( "양산경험을 적어주세요" );
+	        form.reference.focus();
 	        return;
 	    }
-	    if( !form.memo.value )
+	    if( !form.url.value )
 	    {
-	        alert( "내용을 적어주세요" );
-	        form.memo.focus();
+	        alert( "홈페이지 URL을 적어주세요" );
+	        form.url.focus();
 	        return;
 	    }
-	
-	    
-	    form.submit();
+      if( !form.contact.value )
+      {
+          alert( "업체 담당자 명을 적어주세요" );
+          form.contact.focus();
+          return;
+      }
+      if( !form.position.value )
+      {
+          alert( "담당자의 직급을 적어주세요" );
+          form.position.focus();
+          return;
+      }
+      if( !form.phone.value )
+	    {
+	        alert( "담당자의 전화번호를 적어주세요" );
+	        form.phone.focus();
+	        return;
+	    }
+      if( !form.email.value )
+	    {
+	        alert( "담당자의 이메일을 적어주세요" );
+	        form.email.focus();
+	        return;
+	    }
+
+      form.submit();
 	}
-	
+
 	function boardlist()
 	{
 	    var s = "{{searchStr}}";
-        
+
         if(s=="None")
             location.href = '/listSpecificPageWork?current_page={{current_page}}';
         else
-            location.href = '/listSearchedSpecificPageWork?pageForView={{current_page}}&searchStr={{searchStr}}';	    
+            location.href = '/listSearchedSpecificPageWork?pageForView={{current_page}}&searchStr={{searchStr}}';
 	}
-   
+
 </script>
 
-<!--   
+<!--
 장고 1.2부터 post로 값을 보내면 이런 에러가 나오는 경우가 있는데,
-CSRF 보안 때문에 추가됐다고 한다. 참고 
+CSRF 보안 때문에 추가됐다고 한다. 참고
 
 해결방법은 post form뒤에 { % csrf_token %}을 넣어주면 된다.
 
@@ -60,29 +101,24 @@ def foo:
 -->
 
 <table cellspacing = 0 cellpadding = 5 border = 1 width=500>
-<form name=modifyform method=post action="/updateBoard/"> {% csrf_token %}    
-    <input type=hidden name=memo_id  value="{{memo_id}}">    
+<form name=modifyform method=post action="/updateBoard"> {% csrf_token %}
+    <input type=hidden name=memo_id  value="{{memo_id}}">
     <input type=hidden name=current_page  value="{{current_page}} ">
     <input type=hidden name=searchStr  value="{{searchStr}} ">
-                
+
     <tr><td><b>이름</b></td><td>{{ boardData.name }}<input type=hidden name=name size=50  maxlength=30 value="{{ boardData.name }}"></td><tr>
-    <tr><td><b>이메일</b></td><td><input type=text name=mail size=50  maxlength=50 value="{{ boardData.mail }}"></td></tr>
-    <tr><td><b>제목</b></td><td><input type=text name=subject size=50  maxlength=50 value="{{ boardData.subject }}"></td></tr>
-    <tr><td><b>내용</b></td><td><textarea name=memo cols=50 rows=10>{{ boardData.memo }}</textarea></td></tr>
-</form>        
+    <tr><td><b>이메일</b></td><td><input type=text name=email size=50  maxlength=50 value="{{ boardData.email }}"></td></tr>
+    <tr><td><b>제목</b></td><td><input type=text name=business size=50  maxlength=50 value="{{ boardData.business }}"></td></tr>
+    <tr><td><b>내용</b></td><td><textarea name=reference cols=50 rows=10>{{ boardData.reference }}</textarea></td></tr>
+</form>
 </table>
- 
+
 <table  cellspacing = 0 cellpadding = 0 border = 0 width=500>
     <tr><td>
-        <input type=button value="재등록" OnClick="javascript:writeCheck();">
-        <input type=button value="목록" OnClick="javascript:boardlist()">        
+        <input type=button value="Update" OnClick="javascript:writeCheck();">
+        <input type=button value="List" OnClick="javascript:boardlist()">
     </td></tr>
 </table>
 
 
 </html>
-
-
-
-
-

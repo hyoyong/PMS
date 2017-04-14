@@ -19,12 +19,12 @@ from companyinfo.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^show_write_form/', show_write_form, name = "show_write_form"),
-    url(r'^DoWriteBoard/', DoWriteBoard, name = "DoWriteBoard"),
-    url(r'^viewWork/', viewWork),
-    url(r'^listSpecificPageWork/', listSpecificPageWork),
-    url(r'^listSpecificPageWork_to_update/', listSpecificPageWork_to_update),
-    url(r'^updateBoard/', updateBoard),
+    url(r'^show_write_form', show_write_form, name = "show_write_form"),
+    url(r'^DoWriteBoard', DoWriteBoard, name = "DoWriteBoard"),
+    url(r'^viewWork', viewWork),
+    url(r'^listSpecificPageWork', listSpecificPageWork),
+    url(r'^listSpecificPageWork_to_update', listSpecificPageWork_to_update),
+    url(r'^updateBoard', updateBoard),
     url(r'^DeleteSpecificRow/', DeleteSpecificRow),
     url(r'^searchWithSubject/', searchWithSubject),
     url(r'^listSearchedSpecificPageWork/', listSearchedSpecificPageWork),

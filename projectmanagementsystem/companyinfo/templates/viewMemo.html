@@ -1,46 +1,51 @@
 <html>
 <head>
-<title>글보기</title>
-</head>  
-        
+<title>업체내용보기</title>
+</head>
+
 <script language="javascript">
 
     function boardlist()
     {
         var s = "{{searchStr}}";
-        
+
         if(s=="None")
             location.href = '/listSpecificPageWork?current_page={{current_page}}';
         else
             location.href = '/listSearchedSpecificPageWork?pageForView={{current_page}}&searchStr={{searchStr}}';
-    }       
-    
-    function boardmodify() 
+    }
+
+    function boardmodify()
     {
         location.href='/listSpecificPageWork_to_update?memo_id={{memo_id}}&current_page={{current_page}}&searchStr={{searchStr}}';
     }
-       
-    function boarddelete() 
+
+    function boarddelete()
     {
-        location.href='/DeleteSpecificRow?memo_id={{memo_id}}&current_page={{current_page}}';        
-    }    
-   
+        location.href='/DeleteSpecificRow?memo_id={{memo_id}}&current_page={{current_page}}';
+    }
+
 </script>
 
 
-<table cellspacing = 0 cellpadding = 5 border = 1 width=500>
-    <tr><td><b>조회수</b></td><td> {{ boardData.hits }} </td></tr>
-    <tr><td><b>이름 </b></td><td> {{ boardData.name }} </td></tr>
-    <tr><td><b>이메일 </b></td><td> {{ boardData.mail }} </td></tr>    
-    <tr><td><b>제목 </b></td><td> {{ boardData.subject }} </td></tr>
-    <tr><td><b>내용 </b></td><td width=350> {{ boardData.memo }} </td></tr>
+<table cellspacing = 0 cellpadding = 5 border = 1 width=700>
+    <tr><td width=100><b>사업분야 </b></td><td> {{ boardData.technology_select }} </td></tr>
+    <tr><td width=100><b>회사명 </b></td><td> {{ boardData.name }} </td></tr>
+    <tr><td width=100><b>보유기술 </b></td><td> {{ boardData.business }} </td></tr>
+    <tr><td width=100><b>양산경험 </b></td><td> {{ boardData.reference }} </td></tr>
+    <tr><td width=100><b>홈페이지 </b></td><td> {{ boardData.url }} </td></tr>
+    <tr><td width=100><b>업체담당자 </b></td><td> {{ boardData.contact }} </td></tr>
+    <tr><td width=100><b>직급 </b></td><td> {{ boardData.position }} </td></tr>
+    <tr><td width=100><b>전화번호 </b></td><td> {{ boardData.phone }} </td></tr>
+    <tr><td width=100><b>이메일 </b></td><td> {{ boardData.email }} </td></tr>
+    <tr><td width=100><b>등록일 </b></td><td> {{ boardData.created_date }} </td></tr>
 </table>
- 
+
 <table  cellspacing = 0 cellpadding = 0 border = 0 width=500>
     <tr><td>
-        <input type=button value="수정" OnClick="javascript:boardmodify()">
-        <input type=button value="목록" OnClick="javascript:boardlist()">
-        <input type=button value="삭제" OnClick="javascript:boarddelete()">
+        <input type=button value="Modify" OnClick="javascript:boardmodify()">
+        <input type=button value="List" OnClick="javascript:boardlist()">
+        <input type=button value="Delete" OnClick="javascript:boarddelete()">
     </td></tr>
 </table>
 

@@ -44,7 +44,11 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
             <tr>
             <td width=50><p align=center>{{ boardRow.id }}</p></td>
             <td width=100><p align=center>{{ boardRow.technology_select }}</p></td>
-            <td width=100><p align=center>{{ boardRow.name }}</p></td>
+            <td width=100>
+                <p align=center>
+                    <a href="/viewWork?memo_id={{ boardRow.id }}&current_page={{ current_page }}&searchStr=None" title="{{ boardRow.name}}">{{ boardRow.name }}
+                </p>
+            </td>
             <td width=100><p align=center>{{ boardRow.business }}</p></td>
             <td width=100><p align=center>{{ boardRow.reference }}</p></td>
             <td width=100><p align=center>{{ boardRow.url }}</p></td>
@@ -61,7 +65,6 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
         <p>No Data.</p>
     {% endif %}
 </table>
-
 
 <table cellspacing=1 width=100% border=1 >
     <tr>
@@ -82,8 +85,6 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ current_page 
         </td>
     </tr>
 </table>
-
-
 
 <table width=665>
     <tr>

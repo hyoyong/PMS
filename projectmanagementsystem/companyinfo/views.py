@@ -1,13 +1,13 @@
 # coding: utf-8
 
-from django.shortcuts import render
-from companyinfo.forms import *
+#from django.shortcuts import render
+#from companyinfo.forms import *
 
 # Create your views here.
 
 
 
-# coding: utf-8
+
 # Create your views here.
 #from django.template.loader import get_template
 #from django.template import Template, Context
@@ -18,27 +18,25 @@ from companyinfo.models import CompanyInfo
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from companyinfo.pagingHelper import pagingHelper
+from django.http import HttpResponse
 #from django.core.urlresolvers import reverse
 
 
 
 #===========================================================================================
-rowsPerPage = 2
 
+#import pdb; pdb.set_trace()
+rowsPerPage = 10
 
 def home(request):
-    #OK
-    #url = '/listSpecificPageWork?current_page=1'
-    #return HttpResponseRedirect(url)
-
-    boardList = CompanyInfo.objects.order_by('-id')[0:50]
+    boardList = CompanyInfo.objects.order_by('-id')[0:10]
     current_page =1
     totalCnt = CompanyInfo.objects.all().count()
 
     pagingHelperIns = pagingHelper();
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
     print 'totalPageList', totalPageList
-
+    
     return render_to_response('listSpecificPage.html', {'boardList': boardList, 'totalCnt': totalCnt,
                                                         'current_page':current_page ,'totalPageList':totalPageList} )
 
@@ -69,16 +67,6 @@ def DoWriteBoard(request):
 	url = '/listSpecificPageWork?current_page=1'
 	return HttpResponseRedirect(url)
 
-'''
-def DoWriteBoard(request):
-	if request.method == 'POST':
-		form = Form(request.POST)
-		if form.is_valid():
-			form.save()
-	else:
-		form = Form()
-	return render(request, 'write.html', {'form':form}
-'''
 #===========================================================================================
 def viewWork(request):
     pk= request.GET['memo_id']
@@ -99,12 +87,15 @@ def viewWork(request):
 def listSpecificPageWork(request):
     current_page = request.GET['current_page']
     totalCnt = CompanyInfo.objects.all().count()
-
     print 'current_page=', current_page
 
     # 페이지를 가지고 범위 데이터를 조회한다 => raw SQL 사용함
-    boardList = CompanyInfo.objects.raw('SELECT Z.* FROM(SELECT X.*, ceil( rownum / %s ) as page FROM ( SELECT ID,TECHNOLOGY_TYPE,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS \
-                                        FROM companyinfo_CompanyInfo  ORDER BY ID DESC ) X ) Z WHERE page = %s', [rowsPerPage, current_page])
+    #boardList = CompanyInfo.objects.raw('SELECT * FROM(SELECT * ceil( rownum / %s ) as page FROM ( SELECT * FROM companyinfo_companyinfo  ORDER BY id DESC )) WHERE page = %s'), [rowsPerPage, current_page]
+    #boardList = CompanyInfo.objects.raw('SELECT Z.* FROM(SELECT X.*, ceil( @rownum / %s ) as page FROM ( SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo  ORDER BY id DESC ) X ) Z WHERE page = %s', [rowsPerPage, current_page])
+    a = int(current_page)-1
+    b = int(rowsPerPage)
+    c = a*b
+    boardList = CompanyInfo.objects.raw('SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo LIMIT %s,%s',[int(c),int(b)])
 
     print  'boardList=',boardList, 'count()=', totalCnt
 
@@ -214,16 +205,14 @@ def listSearchedSpecificPageWork(request):
     #boardList = CompanyInfo.objects.filter(subject__contains=searchStr)
     #print  'boardList=',boardList
 
-    totalCnt = CompanyInfo.objects.filter(subject__contains=searchStr).count()
+    totalCnt = CompanyInfo.objects.filter(name__contains=searchStr).count()
     print  'totalCnt=',totalCnt
 
     pagingHelperIns = pagingHelper();
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
 
     # like 구문 적용방법
-    boardList = CompanyInfo.objects.raw("""SELECT Z.* FROM ( SELECT X.*, ceil(rownum / %s) as page \
-        FROM ( SELECT ID,TECHNOLOGY_TYPE,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo \
-        WHERE SUBJECT LIKE '%%'||%s||'%%' ORDER BY ID DESC) X ) Z WHERE page = %s""", [rowsPerPage, searchStr, pageForView])
+    boardList = CompanyInfo.objects.raw("""SELECT Z.* FROM ( SELECT X.*, ceil( limit / %s) as page FROM ( SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo WHERE NAME LIKE '%%'||%s||'%%' ORDER BY ID DESC) X ) Z WHERE page = %s""", [rowsPerPage, searchStr, pageForView])
 
     print'boardList=',boardList
 

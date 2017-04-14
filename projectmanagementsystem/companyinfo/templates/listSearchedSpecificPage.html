@@ -5,7 +5,7 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ pageForView }
 <table cellspacing=1 width=700 border=0>
     <tr>
         <td>총 게시물수: {{ totalCnt }}</td>
-        <td><p align=right> 페이지:{{ pageForView }} 
+        <td><p align=right> 페이지:{{ pageForView }}
         </td>
     </tr>
 </table>
@@ -26,18 +26,18 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ pageForView }
 
     {% if boardList %}
         <ul>
-            {% for boardRow in boardList %}     
+            {% for boardRow in boardList %}
             <tr>
             <td width=50><p align=center>{{ boardRow.id }}</p></td>
-            <td width=100><p align=center>{{ boardRow.name }}</p></td>                
+            <td width=100><p align=center>{{ boardRow.name }}</p></td>
             <td width=320>
                 <p align=center>
-                    <a href="/viewWork?memo_id={{ boardRow.id }}&current_page={{ pageForView }}&searchStr={{searchStr}}" title="{{ boardRow.memo}}">{{ boardRow.subject }}
+                    <a href="/viewWork?memo_id={{ boardRow.id }}&current_page={{ pageForView }}&searchStr={{searchStr}}" title="{{ boardRow.memo}}">{{ boardRow.business }}
                 </p>
-            </td>                      
+            </td>
             <td width=100><p align=center>{{ boardRow.created_date }}</p></td>
             <td width=100><p align=center>{{ boardRow.hits }}</p></td>
-            </tr>       
+            </tr>
             {% endfor %}
         </ul>
     {% else %}
@@ -49,21 +49,21 @@ totalCnt: <strong>{{ totalCnt }}</strong> current_page: <strong>{{ pageForView }
 
 <table cellspacing=1 width=700 border=1 >
     <tr>
-        <td>        
+        <td>
         {% for page in totalPageList %}
             <a href="/listSearchedSpecificPageWork?searchStr={{searchStr}}&pageForView={{page}}" >
-            
+
             [
             {% ifequal page pageForView %}
                 <b>
             {% endifequal %}
             {{page}}
-                       
+
             {% ifequal page pageForView  %}
                 </b>
-            {% endifequal %}            
-            ]               
-        {% endfor %}                 
+            {% endifequal %}
+            ]
+        {% endfor %}
         </td>
     </tr>
 </table>
