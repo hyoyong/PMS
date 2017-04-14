@@ -3,13 +3,6 @@
     function writeCheck() {
         var form = document.writeform;
 
-        if (!form.technology_select.value)
-        {
-            alert("사업분야를 기입해주세요");
-            form.technology_select.focus();
-            return;
-        }
-
         if (!form.name.value)
         {
             alert("회사명을 기입해주세요");
@@ -30,7 +23,7 @@
             form.reference.focus();
             return;
         }
-        form.submit();
+      form.submit();
     }
 </script>
 
@@ -41,7 +34,11 @@
 </head>
 <table width=1000 border=1 cellspacing=0 cellpadding=5>
   <form name=writeform method=post action="/DoWriteBoard/">
-    <tr><td><b>분야</b></td><td><input type=text name=technology_select size=30  maxlength=50></td></tr>
+    <tr><td><b>분야</b></td><td>
+      <select name=technology_select>
+        <option value="Auto">AUTOMOTIVE</option>
+        <option value="Consumer">CONSUMER</option>
+        <option value="General">GENRAL</option>
     <tr><td><b>회사명</b></td><td><input type=text name=name size=30  maxlength=50></td></tr>
     <tr><td><b>보유기술</b></td><td><textarea name=business cols=50 rows=5></textarea></td></tr>
     <tr><td><b>양산경험</b></td><td><textarea name=reference cols=50 rows=5></textarea></td></tr>

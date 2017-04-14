@@ -36,7 +36,7 @@ def home(request):
     pagingHelperIns = pagingHelper();
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
     print 'totalPageList', totalPageList
-    
+
     return render_to_response('listSpecificPage.html', {'boardList': boardList, 'totalCnt': totalCnt,
                                                         'current_page':current_page ,'totalPageList':totalPageList} )
 
@@ -105,13 +105,13 @@ def listSpecificPageWork(request):
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
 
     print 'totalPageList', totalPageList
-
+    print 'ddd'
     return render_to_response('listSpecificPage.html', {'boardList': boardList, 'totalCnt': totalCnt,
                                                         'current_page':int(current_page) ,'totalPageList':totalPageList} )
 
 #===========================================================================================
 
-def listSpecificPageWork_to_update(request):
+def updatePage(request):
     memo_id = request.GET['memo_id']
     current_page = request.GET['current_page']
     searchStr = request.GET['searchStr']
