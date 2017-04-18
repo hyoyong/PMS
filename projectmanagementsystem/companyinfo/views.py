@@ -19,6 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from companyinfo.pagingHelper import pagingHelper
 from django.http import HttpResponse
+import MySQLdb
 #from django.core.urlresolvers import reverse
 
 
@@ -95,7 +96,7 @@ def listSpecificPageWork(request):
     a = int(current_page)-1
     b = int(rowsPerPage)
     c = a*b
-    boardList = CompanyInfo.objects.raw('SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo LIMIT %s,%s',[int(c),int(b)])
+    boardList = CompanyInfo.objects.raw('SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo ORDER BY id DESC LIMIT %s,%s',[int(c),int(b)])
 
     print  'boardList=',boardList, 'count()=', totalCnt
 
@@ -105,7 +106,6 @@ def listSpecificPageWork(request):
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
 
     print 'totalPageList', totalPageList
-    print 'ddd'
     return render_to_response('listSpecificPage.html', {'boardList': boardList, 'totalCnt': totalCnt,
                                                         'current_page':int(current_page) ,'totalPageList':totalPageList} )
 
@@ -167,6 +167,14 @@ def DeleteSpecificRow(request):
 
     p = CompanyInfo.objects.get(id=memo_id)
     p.delete()
+
+#db connect시, 성능이슈 발생, 추후 개선필요
+    db = MySQLdb.connect(user='root', db='dj_pms', passwd='qwer1234!', host='localhost')
+    cur = db.cursor()
+    cur.execute('ALTER TABLE companyinfo_companyinfo DROP id')
+    cur.execute('ALTER TABLE companyinfo_companyinfo ADD id int primary key AUTO_INCREMENT FIRST')
+    db.close()
+
 
     # Display Page
     # 마지막 메모를 삭제하는 경우, 페이지를 하나 줄임.

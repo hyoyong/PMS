@@ -9,12 +9,6 @@
 	{
 	    var form = document.modifyform;
 
-      if( !form.technology_select.value )
-      {
-          alert( "업체명을 적어주세요" );
-          form.technology_select.focus();
-          return;
-      }
       if( !form.name.value )
       {
           alert( "업체명을 적어주세요" );
@@ -33,37 +27,12 @@
 	        form.reference.focus();
 	        return;
 	    }
-	    if( !form.url.value )
-	    {
-	        alert( "홈페이지 URL을 적어주세요" );
-	        form.url.focus();
-	        return;
-	    }
       if( !form.contact.value )
       {
           alert( "업체 담당자 명을 적어주세요" );
           form.contact.focus();
           return;
       }
-      if( !form.position.value )
-      {
-          alert( "담당자의 직급을 적어주세요" );
-          form.position.focus();
-          return;
-      }
-      if( !form.phone.value )
-	    {
-	        alert( "담당자의 전화번호를 적어주세요" );
-	        form.phone.focus();
-	        return;
-	    }
-      if( !form.email.value )
-	    {
-	        alert( "담당자의 이메일을 적어주세요" );
-	        form.email.focus();
-	        return;
-	    }
-
       form.submit();
 	}
 
@@ -79,37 +48,25 @@
 
 </script>
 
-<!--
-장고 1.2부터 post로 값을 보내면 이런 에러가 나오는 경우가 있는데,
-CSRF 보안 때문에 추가됐다고 한다. 참고
-
-해결방법은 post form뒤에 { % csrf_token %}을 넣어주면 된다.
-
-예) <form action="" method="post">{% csrf_token %}
-
-또는
-
-csrf보안 처리가 안된 python코드 안에 django.views.decorators.csrf.csrf_exempt를 import하고, @csrf_exempt로 데코레이션하면 된다.
-
-예)
-from django.views.decorators.csrf import csrf_exempt
-...
-@csrf_exempt
-def foo:
-
-결과는 똑같으니 뷰와 템플릿을 좀 더 분리하고 싶으면 후자를 쓰면된다.
--->
-
-<table cellspacing = 0 cellpadding = 5 border = 1 width=500>
+<table cellspacing = 0 cellpadding = 5 border = 1 width=1000>
 <form name=modifyform method=post action="/updateBoard"> {% csrf_token %}
     <input type=hidden name=memo_id  value="{{memo_id}}">
     <input type=hidden name=current_page  value="{{current_page}} ">
     <input type=hidden name=searchStr  value="{{searchStr}} ">
 
-    <tr><td><b>이름</b></td><td>{{ boardData.name }}<input type=hidden name=name size=50  maxlength=30 value="{{ boardData.name }}"></td><tr>
-    <tr><td><b>이메일</b></td><td><input type=text name=email size=50  maxlength=50 value="{{ boardData.email }}"></td></tr>
-    <tr><td><b>제목</b></td><td><input type=text name=business size=50  maxlength=50 value="{{ boardData.business }}"></td></tr>
-    <tr><td><b>내용</b></td><td><textarea name=reference cols=50 rows=10>{{ boardData.reference }}</textarea></td></tr>
+		<tr><td><b>분야</b></td><td>
+      <select name=technology_select>
+        <option value="Auto">AUTOMOTIVE</option>
+        <option value="Consumer">CONSUMER</option>
+        <option value="General">GENRAL</option>
+		<tr><td><b>회사명</b></td><td><input type=text name=name size=50  maxlength=50 value="{{ boardData.name }}"></td></tr>
+		<tr><td><b>진행사업</b></td><td><input type=text name=business size=50  maxlength=50 value="{{ boardData.business }}"></td></tr>
+		<tr><td><b>양산경험</b></td><td><input type=text name=reference size=50  maxlength=50 value="{{ boardData.reference }}"></td></tr>
+		<tr><td><b>홈페이지</b></td><td><input type=text name=url size=50  maxlength=50 value="{{ boardData.url }}"></td></tr>
+		<tr><td><b>업체담당자</b></td><td><input type=text name=contact size=50  maxlength=50 value="{{ boardData.contact }}"></td></tr>
+		<tr><td><b>직급</b></td><td><input type=text name=position size=50  maxlength=50 value="{{ boardData.position }}"></td></tr>
+		<tr><td><b>전화번호</b></td><td><input type=text name=phone size=50  maxlength=50 value="{{ boardData.phone }}"></td></tr>
+		<tr><td><b>이메일</b></td><td><input type=text name=email size=50  maxlength=50 value="{{ boardData.email }}"></td></tr>
 </form>
 </table>
 
