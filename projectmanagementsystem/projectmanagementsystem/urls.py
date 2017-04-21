@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^updateBoard', updateBoard),
     url(r'^DeleteSpecificRow', DeleteSpecificRow),
     url(r'^searchWithSubject/', searchWithSubject),
-    url(r'^listSearchedSpecificPageWork/', listSearchedSpecificPageWork),
+    url(r'^listSearchedSpecificPageWork', listSearchedSpecificPageWork),
     url(r'^', home),
 ]

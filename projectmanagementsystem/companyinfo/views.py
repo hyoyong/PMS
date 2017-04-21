@@ -219,12 +219,11 @@ def listSearchedSpecificPageWork(request):
     pagingHelperIns = pagingHelper();
     totalPageList = pagingHelperIns.getTotalPageList( totalCnt, rowsPerPage)
 
-    # like 구문 적용방법
-    boardList = CompanyInfo.objects.raw("""SELECT Z.* FROM ( SELECT X.*, ceil( limit / %s) as page FROM ( SELECT id,technology_select,NAME,BUSINESS,REFERENCE,CONTACT,POSITION,PHONE,EMAIL,URL,CREATED_DATE,HITS FROM companyinfo_companyinfo WHERE NAME LIKE '%%'||%s||'%%' ORDER BY ID DESC) X ) Z WHERE page = %s""", [rowsPerPage, searchStr, pageForView])
+    boardList = CompanyInfo.objects.raw("SELECT * FROM companyinfo_companyinfo WHERE (NAME LIKE %s OR BUSINESS LIKE %s OR CONTACT LIKE %s OR URL LIKE %s)" ,["%" + searchStr + "%","%" + searchStr + "%","%" + searchStr + "%","%" + searchStr + "%"])
 
     print'boardList=',boardList
 
     return render_to_response('listSearchedSpecificPage.html', {'boardList': boardList, 'totalCnt': totalCnt,
                                                         'pageForView':int(pageForView) ,'searchStr':searchStr, 'totalPageList':totalPageList} )
-
+    db.close()
 #===========================================================================================
