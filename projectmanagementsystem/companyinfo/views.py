@@ -25,11 +25,18 @@ import MySQLdb
 
 
 #===========================================================================================
+def home(request):
+    return render_to_response('home.html')
+
+
+
+
+#===========================================================================================
 
 #import pdb; pdb.set_trace()
 rowsPerPage = 10
 
-def home(request):
+def CompanyList(request):
     boardList = CompanyInfo.objects.order_by('-id')[0:10]
     current_page =1
     totalCnt = CompanyInfo.objects.all().count()
