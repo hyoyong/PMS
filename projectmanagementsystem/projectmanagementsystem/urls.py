@@ -18,7 +18,7 @@ from django.contrib import admin
 from companyinfo.views import *
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin', admin.site.urls),
     url(r'^show_write_form', show_write_form, name = "show_write_form"),
     url(r'^DoWriteBoard', DoWriteBoard, name = "DoWriteBoard"),
     url(r'^viewWork', viewWork),

@@ -19,7 +19,7 @@
             <div class="devsite-product-name-wrapper">
               <span class="devsite-product-name">
                 <ul class="devsite-breadcrumb-list">
-                  <li class="devsite-breadcrumb-item"><a href="https://google-developers.appspot.com/chart/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Upper Header" data-value="1">
+                  <li class="devsite-breadcrumb-item"><a href="http://localhost:8000" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Upper Header" data-value="1">
                     Telechips R&D Center</a>
                   </li>
                 </ul>
@@ -40,13 +40,13 @@
               Info. Database
             </span>
             <li class="devsite-nav-item">
-              <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="1" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click">
-                Company Information
+              <a href="http://localhost:8000/companylist" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="1" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click">
+                업체 정보
               </a>
             </li>
             <li class="devsite-nav-item">
               <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="1" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click">
-                Personal Information
+                대외 이해관계자 정보
               </a>
             </li>
           </li>
@@ -57,211 +57,69 @@
             </span>
             <li class="devsite-nav-item">
               <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="1" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click">
-                Chart Gallery
+                연구소 과제 정보
               </a>
             </li>
             <li class="devsite-nav-item">
               <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/annotationchart" class="devsite-nav-title gc-analytics-event" track-type="leftNav" track-name="titleLink" track-metadata-position="1" data-category="Site-Wide Custom Events" data-label="Left nav" data-action="click">
-                nnotation Charts
+                TIMS 처리현황
               </a>
             </li>
           </li>
     </nav>
 
 
-
-
-  <nav class="devsite-page-nav devsite-nav"></nav>
-
-
-      <article class="devsite-article">
-        <article class="devsite-article-inner">
-
-
-
-
-
-
-
-  <nav class="devsite-breadcrumb-nav devsite-nav">
-
-
-
-<ul class="devsite-breadcrumb-list">
-
-  <li class="devsite-breadcrumb-item">
-
-
-    <a href="https://google-developers.appspot.com/products/" class="devsite-breadcrumb-link gc-analytics-event"
-       data-category="Site-Wide Custom Events" data-label="Breadcrumbs"
-       data-value="1">
-
-
-      Products
-
-
-    </a>
-
-  </li>
-
-  <li class="devsite-breadcrumb-item">
-
-
-    <div class="devsite-breadcrumb-guillemet material-icons"></div>
-
-
-    <a href="https://google-developers.appspot.com/chart/" class="devsite-breadcrumb-link gc-analytics-event"
-       data-category="Site-Wide Custom Events" data-label="Breadcrumbs"
-       data-value="2">
-
-
-      Charts
-
-
-    </a>
-
-  </li>
-
-  <li class="devsite-breadcrumb-item">
-
-
-    <div class="devsite-breadcrumb-guillemet material-icons"></div>
-
-
-    <a href="https://google-developers.appspot.com/chart/interactive/docs/" class="devsite-breadcrumb-link gc-analytics-event"
-       data-category="Site-Wide Custom Events" data-label="Breadcrumbs"
-       data-value="3">
-
-
-      Guides
-
-
-    </a>
-
-  </li>
-
-</ul>
-
-  </nav>
-
-
-  <h1 itemprop="name" class="devsite-page-title">
-    Quick Start
-  </h1>
-
-
-  <nav class="devsite-page-nav-embedded devsite-nav"></nav>
-
-  <div class="devsite-article-body clearfix
-            "
-       itemprop="articleBody">
-
-
-
-<p>Here's a simple example of a page that displays a <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/piechart">pie chart</a>:</p>
-
-<iframe data-src="https://google-developers.appspot.com/chart/interactive/docs/quick_start_b5a5d0ea881453eaf5d406489a4f5619.frame" class="framebox inherit-locale " style="width: calc(100% + 40px); height: calc(100px + 40px);"><p>[This section requires a browser that supports JavaScript and iframes.]</p></iframe>
-
-<p>You can copy the snippet below to an .html file on your computer and open it in your browser to display
-  the pie chart shown above:</p>
-<pre class="prettyprint lang-html">
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;!--Load the AJAX API--&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    &lt;/script&gt;
-  &lt;/head&gt;
-
-  &lt;body&gt;
-    &lt;!--Div that will hold the pie chart--&gt;
-    &lt;div id=&quot;chart_div&quot;&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre>
-<h2>How About a Bar Chart?</h2>
-<p>Convert the pie chart to a bar chart by replacing <span class="prettyprint lang-
-  js"><code>google.visualization.PieChart</code></span> with <span class="prettyprint lang-l
-js"><code>google.visualization.BarChart</code></span> in the code and reloading your browser. You
-may notice that the "Slices" legend is truncated. To fix this, change <code>width</code> to 500
-  from 400, save the file, and reload your browser.
-   <div class="g-button-basic" style="margin-top: 40px;">
-  <div> <span><span><a style="font-size:120%"
-                       href="https://google-developers.appspot.com/chart/interactive/docs/basic_load_libs"><strong>Next: <em>How does it
-    work?</em></strong></a></span></span></div>
-</div>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="devsite-content-footer nocontent">
-
-
-    <p>Except as otherwise noted, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.com/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
-
-
-
-
-    <p class="devsite-content-footer-date" itemprop="datePublished"
-       content="2017-02-23T17:35:27.710930">
-
-      Last updated February 23, 2017.
-    </p>
-
-
-</div>
-
+    <article class="devsite-article">
+      <article class="devsite-article-inner">
+        <h1 itemprop="name" class="devsite-page-title">
+          R&D 통계 지표
+        </h1>
+
+<!--
+        <div class="devsite-article-body clearfix" itemprop="articleBody">
+          <p>Here's a simple example of a page that displays a
+            <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/piechart">
+              pie chart
+            </a>:
+          </p>
+
+          <iframe data-src="https://google-developers.appspot.com/chart/interactive/docs/quick_start_b5a5d0ea881453eaf5d406489a4f5619.frame" class="framebox inherit-locale " style="width: calc(100% + 40px); height: calc(100px + 40px);">
+            <p>[This section requires a browser that supports JavaScript and iframes.]</p>
+          </iframe>
+
+          <p>You can copy the snippet below to an .html file on your computer and open it in your browser to display the pie chart shown above:</p>
+          <pre class="prettyprint lang-html"> 하하하
+          </pre>
+
+          <h2>How About a Bar Chart?</h2>
+          <p>Convert the pie chart to a bar chart by replacing
+            <span class="prettyprint lang-js">
+              <code>google.visualization.PieChart</code>
+            </span> with
+            <span class="prettyprint lang-ljs">
+              <code>google.visualization.BarChart</code>
+            </span> 호호호
+            <code>width</code> browser.
+
+            <div class="g-button-basic" style="margin-top: 40px;">
+              <div>
+                <span>
+                  <span>
+                    <a style="font-size:120%" href="https://google-developers.appspot.com/chart/interactive/docs/basic_load_libs">
+                      <strong>Next:
+                        <em>How does it work?</em>
+                      </strong>
+                    </a>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </div>
         </article>
       </article>
-
-
-        </div>
+    </div>
 
 
 <footer class="devsite-footer-linkboxes nocontent
